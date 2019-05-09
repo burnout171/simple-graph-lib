@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class UndirectedGraphTest {
+class DirectedGraphTest {
 
     private final SearchEngine dfs = new DfsSearch();
 
@@ -22,7 +22,7 @@ class UndirectedGraphTest {
 
     @BeforeEach
     void setUp() {
-        graph = new UndirectedGraph();
+        graph = new DirectedGraph();
     }
 
     @Test
@@ -89,7 +89,7 @@ class UndirectedGraphTest {
     }
 
     @Test
-    void reversedPathBetweenVertexes() {
+    void reversedPathBetweenVertexesNotFound() {
         Vertex a = Vertex.of("A");
         Vertex b = Vertex.of("B");
         graph.addVertex(a);
@@ -98,7 +98,7 @@ class UndirectedGraphTest {
 
         List<Edge> actual = graph.getPath(b, a, dfs);
 
-        assertEquals(Collections.singletonList(Edge.of(b, a)), actual);
+        assertEquals(Collections.emptyList(), actual);
     }
 
     // A - B - C - D
@@ -120,4 +120,5 @@ class UndirectedGraphTest {
 
         assertEquals(Arrays.asList(Edge.of(a, b), Edge.of(b, c), Edge.of(c, d)), actual);
     }
+
 }

@@ -43,23 +43,21 @@ class DfsSearchTest {
     }
 
 
-    // A - B
-    // |   |
-    // D - C
+    // A - B - C - D
     @Test
-    void pathInSquareConnectedVertexes() {
+    void pathInChainedVertexes() {
         Vertex a = Vertex.of("A");
         Vertex b = Vertex.of("B");
         Vertex c = Vertex.of("C");
         Vertex d = Vertex.of("D");
         Map<Vertex, Set<Edge>> vertexesToEdges = new HashMap<>();
-        vertexesToEdges.put(a, new HashSet<>(Arrays.asList(Edge.of(a, b), Edge.of(a, d))));
+        vertexesToEdges.put(a, new HashSet<>(Collections.singletonList(Edge.of(a, b))));
         vertexesToEdges.put(b, new HashSet<>(Arrays.asList(Edge.of(b, a), Edge.of(b, c))));
         vertexesToEdges.put(c, new HashSet<>(Arrays.asList(Edge.of(c, b), Edge.of(c, d))));
-        vertexesToEdges.put(d, new HashSet<>(Arrays.asList(Edge.of(d, c), Edge.of(d, a))));
+        vertexesToEdges.put(d, new HashSet<>(Collections.singletonList(Edge.of(d, c))));
 
-        List<Edge> actual = engine.getPath(a, c, vertexesToEdges);
+        List<Edge> actual = engine.getPath(a, d, vertexesToEdges);
 
-        assertEquals(Arrays.asList(Edge.of(a, d), Edge.of(d, c)), actual);
+        assertEquals(Arrays.asList(Edge.of(a, b), Edge.of(b, c), Edge.of(c, d)), actual);
     }
 }
