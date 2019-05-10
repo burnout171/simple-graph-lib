@@ -15,23 +15,23 @@ import static java.util.Objects.nonNull;
 
 public abstract class AbstractGraph<V> implements Graph<V> {
 
-    private final Map<V, Set<Edge<V>>> vertexesToEdges;
+    private final Map<V, Set<Edge<V>>> verticesToEdges;
 
     AbstractGraph() {
-        this.vertexesToEdges = new ConcurrentHashMap<>();
+        this.verticesToEdges = new ConcurrentHashMap<>();
     }
 
     @Override
     public void addVertex(V vertex) {
         if (isNull(vertex)) {
-            throw new IllegalArgumentException("Vertex should be not null!");
+            throw new IllegalArgumentException("Vertex should not be null!");
         }
-        vertexesToEdges.putIfAbsent(vertex, new HashSet<>());
+        verticesToEdges.putIfAbsent(vertex, new HashSet<>());
     }
 
     @Override
     public void addEdge(Edge<V> edge) {
-        vertexesToEdges.compute(edge.getSrc(), (k, v) -> {
+        verticesToEdges.compute(edge.getSource(), (k, v) -> {
             Set<Edge<V>> edges = nonNull(v) ? v : new HashSet<>();
             edges.add(edge);
             return edges;
@@ -44,15 +44,15 @@ public abstract class AbstractGraph<V> implements Graph<V> {
             throw new IllegalArgumentException("Src and dst vertexes should not be null!");
         }
         searchEngine = nonNull(searchEngine) ? searchEngine : new BfsSearch<>();
-        return searchEngine.getPath(src, dst, vertexesToEdges);
+        return searchEngine.getPath(src, dst, verticesToEdges);
     }
 
     void checkVertexesExist(Edge<V> edge) {
-        if (!vertexesToEdges.containsKey(edge.getSrc())) {
-            throw new IllegalArgumentException("Could not add edge since vertex " + edge.getSrc() + " does not exist");
+        if (!verticesToEdges.containsKey(edge.getSource())) {
+            throw new IllegalArgumentException("Could not add edge since vertex " + edge.getSource() + " does not exist");
         }
-        if (!vertexesToEdges.containsKey(edge.getDst())) {
-            throw new IllegalArgumentException("Could not add edge since vertex " + edge.getDst() + " does not exist");
+        if (!verticesToEdges.containsKey(edge.getDestination())) {
+            throw new IllegalArgumentException("Could not add edge since vertex " + edge.getDestination() + " does not exist");
         }
     }
 }

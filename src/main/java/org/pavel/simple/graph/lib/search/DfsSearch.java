@@ -29,7 +29,7 @@ public class DfsSearch<V> implements SearchEngine<V> {
                 continue;
             }
             for (Edge<V> edge : adjustmentEdges) {
-                V to = edge.getDst();
+                V to = edge.getDestination();
                 if (visited.add(to)) {
                     traversed.push(to);
                     predecessors.put(to, edge);

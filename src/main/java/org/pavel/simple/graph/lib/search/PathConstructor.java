@@ -18,7 +18,7 @@ final class PathConstructor {
         while (!current.equals(src)) {
             Edge<V> edge = predecessors.get(current);
             path.add(edge);
-            current = edge.getSrc();
+            current = edge.getSource();
         }
         Collections.reverse(path);
         return path;

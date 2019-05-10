@@ -8,7 +8,7 @@ public class UndirectedGraph<V> extends AbstractGraph<V> {
     public void addEdge(Edge<V> edge) {
         checkVertexesExist(edge);
         super.addEdge(edge);
-        Edge<V> reversed = Edge.of(edge.getDst(), edge.getSrc());
+        Edge<V> reversed = Edge.of(edge.getDestination(), edge.getSource());
         super.addEdge(reversed);
     }
 }
