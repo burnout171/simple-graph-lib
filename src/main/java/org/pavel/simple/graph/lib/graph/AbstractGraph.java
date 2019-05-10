@@ -1,7 +1,7 @@
 package org.pavel.simple.graph.lib.graph;
 
 import org.pavel.simple.graph.lib.model.Edge;
-import org.pavel.simple.graph.lib.search.DfsSearch;
+import org.pavel.simple.graph.lib.search.BfsSearch;
 import org.pavel.simple.graph.lib.search.SearchEngine;
 
 import java.util.HashSet;
@@ -43,7 +43,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
         if (isNull(src) || isNull(dst)) {
             throw new IllegalArgumentException("Src and dst vertexes should not be null!");
         }
-        searchEngine = nonNull(searchEngine) ? searchEngine : new DfsSearch<>();
+        searchEngine = nonNull(searchEngine) ? searchEngine : new BfsSearch<>();
         return searchEngine.getPath(src, dst, vertexesToEdges);
     }
 

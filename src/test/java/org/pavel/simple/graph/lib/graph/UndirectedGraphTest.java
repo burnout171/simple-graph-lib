@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.pavel.simple.graph.lib.model.Edge;
 import org.pavel.simple.graph.lib.model.Vertex;
-import org.pavel.simple.graph.lib.search.DfsSearch;
+import org.pavel.simple.graph.lib.search.BfsSearch;
 import org.pavel.simple.graph.lib.search.SearchEngine;
 
 import java.util.Arrays;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UndirectedGraphTest {
 
-    private final SearchEngine<Vertex> dfs = new DfsSearch<>();
+    private final SearchEngine<Vertex> bfs = new BfsSearch<>();
 
     private Graph<Vertex> graph;
 
@@ -57,7 +57,7 @@ class UndirectedGraphTest {
         graph.addVertex(a);
         graph.addVertex(b);
 
-        List<Edge<Vertex>> actual = graph.getPath(a, b, dfs);
+        List<Edge<Vertex>> actual = graph.getPath(a, b, bfs);
 
         assertEquals(Collections.emptyList(), actual);
     }
@@ -70,7 +70,7 @@ class UndirectedGraphTest {
         graph.addVertex(b);
         graph.addEdge(Edge.of(a, b));
 
-        List<Edge<Vertex>> actual = graph.getPath(a, b, dfs);
+        List<Edge<Vertex>> actual = graph.getPath(a, b, bfs);
 
         assertEquals(Collections.singletonList(Edge.of(a, b)), actual);
     }
@@ -96,7 +96,7 @@ class UndirectedGraphTest {
         graph.addVertex(b);
         graph.addEdge(Edge.of(a, b));
 
-        List<Edge<Vertex>> actual = graph.getPath(b, a, dfs);
+        List<Edge<Vertex>> actual = graph.getPath(b, a, bfs);
 
         assertEquals(Collections.singletonList(Edge.of(b, a)), actual);
     }
@@ -124,9 +124,10 @@ class UndirectedGraphTest {
         graph.addEdge(Edge.of(a, b));
         graph.addEdge(Edge.of(c, d));
         graph.addEdge(Edge.of(d, e));
+        graph.addEdge(Edge.of(b, e));
 
-        List<Edge<Vertex>> actual = graph.getPath(a, e, dfs);
+        List<Edge<Vertex>> actual = graph.getPath(a, e, bfs);
 
-        assertEquals(Arrays.asList(Edge.of(a, c), Edge.of(c, d), Edge.of(d, e)), actual);
+        assertEquals(Arrays.asList(Edge.of(a, b), Edge.of(b, e)), actual);
     }
 }

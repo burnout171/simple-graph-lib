@@ -5,25 +5,26 @@ import org.pavel.simple.graph.lib.model.Edge;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
-import java.util.Stack;
 
 import static java.util.Objects.isNull;
 import static org.pavel.simple.graph.lib.search.PathConstructor.toPath;
 
-public class DfsSearch<V> implements SearchEngine<V> {
+public class BfsSearch<V> implements SearchEngine<V> {
 
     @Override
     public List<Edge<V>> getPath(V source, V destination, Map<V, Set<Edge<V>>> vertexesToEdges) {
-        Stack<V> traversed = new Stack<>();
+        Queue<V> traversed = new LinkedList<>();
         Set<V> visited = new HashSet<>();
         Map<V, Edge<V>> predecessors = new HashMap<>();
         visited.add(source);
-        traversed.push(source);
-        while (!traversed.empty()) {
-            V currentVertex = traversed.pop();
+        traversed.add(source);
+        while (!traversed.isEmpty()) {
+            V currentVertex = traversed.poll();
             Set<Edge<V>> adjustmentEdges = vertexesToEdges.get(currentVertex);
             if (isNull(adjustmentEdges)) {
                 continue;
@@ -31,7 +32,7 @@ public class DfsSearch<V> implements SearchEngine<V> {
             for (Edge<V> edge : adjustmentEdges) {
                 V to = edge.getDst();
                 if (visited.add(to)) {
-                    traversed.push(to);
+                    traversed.add(to);
                     predecessors.put(to, edge);
                     if (to.equals(destination)) {
                         return toPath(source, destination, predecessors);
