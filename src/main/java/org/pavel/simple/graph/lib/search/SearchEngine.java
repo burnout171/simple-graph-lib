@@ -1,14 +1,13 @@
 package org.pavel.simple.graph.lib.search;
 
 import org.pavel.simple.graph.lib.model.Edge;
-import org.pavel.simple.graph.lib.model.Vertex;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public interface SearchEngine {
+public interface SearchEngine<V> {
 
-    List<Edge> getPath(Vertex src, Vertex dst, Map<Vertex, Set<Edge>> vertexesToEdges);
+    List<Edge<V>> getPath(V src, V dst, Map<V, Set<Edge<V>>> vertexesToEdges);
 
 }

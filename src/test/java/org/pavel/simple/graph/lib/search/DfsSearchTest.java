@@ -16,15 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DfsSearchTest {
 
-    private final SearchEngine engine = new DfsSearch();
+    private final SearchEngine<Vertex> engine = new DfsSearch<>();
 
     @Test
     void noPath() {
         Vertex a = Vertex.of("A");
         Vertex b = Vertex.of("B");
-        Map<Vertex, Set<Edge>> vertexesToEdges = new HashMap<>();
+        Map<Vertex, Set<Edge<Vertex>>> vertexesToEdges = new HashMap<>();
 
-        List<Edge> actual = engine.getPath(a, b, vertexesToEdges);
+        List<Edge<Vertex>> actual = engine.getPath(a, b, vertexesToEdges);
 
         assertEquals(Collections.emptyList(), actual);
     }
@@ -33,11 +33,11 @@ class DfsSearchTest {
     void onlyPathBetweenVertexes() {
         Vertex a = Vertex.of("A");
         Vertex b = Vertex.of("B");
-        Map<Vertex, Set<Edge>> vertexesToEdges = new HashMap<>();
+        Map<Vertex, Set<Edge<Vertex>>> vertexesToEdges = new HashMap<>();
         vertexesToEdges.put(a, new HashSet<>(Collections.singletonList(Edge.of(a, b))));
         vertexesToEdges.put(b, new HashSet<>(Collections.singletonList(Edge.of(b, a))));
 
-        List<Edge> actual = engine.getPath(a, b, vertexesToEdges);
+        List<Edge<Vertex>> actual = engine.getPath(a, b, vertexesToEdges);
 
         assertEquals(Collections.singletonList(Edge.of(a, b)), actual);
     }
@@ -50,13 +50,13 @@ class DfsSearchTest {
         Vertex b = Vertex.of("B");
         Vertex c = Vertex.of("C");
         Vertex d = Vertex.of("D");
-        Map<Vertex, Set<Edge>> vertexesToEdges = new HashMap<>();
+        Map<Vertex, Set<Edge<Vertex>>> vertexesToEdges = new HashMap<>();
         vertexesToEdges.put(a, new HashSet<>(Collections.singletonList(Edge.of(a, b))));
         vertexesToEdges.put(b, new HashSet<>(Arrays.asList(Edge.of(b, a), Edge.of(b, c))));
         vertexesToEdges.put(c, new HashSet<>(Arrays.asList(Edge.of(c, b), Edge.of(c, d))));
         vertexesToEdges.put(d, new HashSet<>(Collections.singletonList(Edge.of(d, c))));
 
-        List<Edge> actual = engine.getPath(a, d, vertexesToEdges);
+        List<Edge<Vertex>> actual = engine.getPath(a, d, vertexesToEdges);
 
         assertEquals(Arrays.asList(Edge.of(a, b), Edge.of(b, c), Edge.of(c, d)), actual);
     }

@@ -1,16 +1,15 @@
 package org.pavel.simple.graph.lib.graph;
 
 import org.pavel.simple.graph.lib.model.Edge;
-import org.pavel.simple.graph.lib.model.Vertex;
 import org.pavel.simple.graph.lib.search.SearchEngine;
 
 import java.util.List;
 
-public interface Graph {
+public interface Graph<V> {
 
-    void addVertex(Vertex vertex);
+    void addVertex(V vertex);
 
-    void addEdge(Edge edge);
+    void addEdge(Edge<V> edge);
 
-    List<Edge> getPath(Vertex source, Vertex destination, SearchEngine searchEngine);
+    List<Edge<V>> getPath(V source, V destination, SearchEngine<V> searchEngine);
 }

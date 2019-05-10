@@ -6,12 +6,12 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Edge {
+public class Edge<V> {
 
-    private final Vertex src;
-    private final Vertex dst;
+    private final V src;
+    private final V dst;
 
-    public static Edge of(Vertex source, Vertex destination) {
-        return new Edge(source, destination);
+    public static <V> Edge<V> of(V source, V destination) {
+        return new Edge<>(source, destination);
     }
 }

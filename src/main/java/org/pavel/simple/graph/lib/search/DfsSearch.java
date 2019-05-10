@@ -1,7 +1,6 @@
 package org.pavel.simple.graph.lib.search;
 
 import org.pavel.simple.graph.lib.model.Edge;
-import org.pavel.simple.graph.lib.model.Vertex;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,23 +13,23 @@ import java.util.Stack;
 
 import static java.util.Objects.isNull;
 
-public class DfsSearch implements SearchEngine {
+public class DfsSearch<V> implements SearchEngine<V> {
 
     @Override
-    public List<Edge> getPath(Vertex source, Vertex destination, Map<Vertex, Set<Edge>> vertexesToEdges) {
-        Stack<Vertex> traversed = new Stack<>();
-        Set<Vertex> visited = new HashSet<>();
-        Map<Vertex, Edge> predecessors = new HashMap<>();
+    public List<Edge<V>> getPath(V source, V destination, Map<V, Set<Edge<V>>> vertexesToEdges) {
+        Stack<V> traversed = new Stack<>();
+        Set<V> visited = new HashSet<>();
+        Map<V, Edge<V>> predecessors = new HashMap<>();
         visited.add(source);
         traversed.push(source);
         while (!traversed.empty()) {
-            Vertex currentVertex = traversed.pop();
-            Set<Edge> adjustmentEdges = vertexesToEdges.get(currentVertex);
+            V currentVertex = traversed.pop();
+            Set<Edge<V>> adjustmentEdges = vertexesToEdges.get(currentVertex);
             if (isNull(adjustmentEdges)) {
                 continue;
             }
-            for (Edge edge : adjustmentEdges) {
-                Vertex to = edge.getDst();
+            for (Edge<V> edge : adjustmentEdges) {
+                V to = edge.getDst();
                 if (visited.add(to)) {
                     traversed.add(to);
                     predecessors.put(to, edge);
@@ -43,11 +42,11 @@ public class DfsSearch implements SearchEngine {
         return Collections.emptyList();
     }
 
-    private List<Edge> toPath(Vertex src, Vertex dst, Map<Vertex, Edge> predecessors) {
-        List<Edge> path = new ArrayList<>();
-        Vertex current = dst;
+    private List<Edge<V>> toPath(V src, V dst, Map<V, Edge<V>> predecessors) {
+        List<Edge<V>> path = new ArrayList<>();
+        V current = dst;
         while (!current.equals(src)) {
-            Edge edge = predecessors.get(current);
+            Edge<V> edge = predecessors.get(current);
             path.add(edge);
             current = edge.getSrc();
         }
