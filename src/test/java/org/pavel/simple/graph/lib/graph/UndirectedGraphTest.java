@@ -101,23 +101,32 @@ class UndirectedGraphTest {
         assertEquals(Collections.singletonList(Edge.of(b, a)), actual);
     }
 
-    // A - B - C - D
+    //      A
+    //    /   \
+    //   B     C
+    //    \     \
+    //     \     D
+    //      \     \
+    //       ------E
     @Test
-    void pathInChainedVertexes() {
+    void pathInComplexGraph() {
         Vertex a = Vertex.of("A");
         Vertex b = Vertex.of("B");
         Vertex c = Vertex.of("C");
         Vertex d = Vertex.of("D");
+        Vertex e = Vertex.of("E");
         graph.addVertex(a);
         graph.addVertex(b);
         graph.addVertex(c);
         graph.addVertex(d);
+        graph.addVertex(e);
+        graph.addEdge(Edge.of(a, c));
         graph.addEdge(Edge.of(a, b));
-        graph.addEdge(Edge.of(b, c));
         graph.addEdge(Edge.of(c, d));
+        graph.addEdge(Edge.of(d, e));
 
-        List<Edge<Vertex>> actual = graph.getPath(a, d, dfs);
+        List<Edge<Vertex>> actual = graph.getPath(a, e, dfs);
 
-        assertEquals(Arrays.asList(Edge.of(a, b), Edge.of(b, c), Edge.of(c, d)), actual);
+        assertEquals(Arrays.asList(Edge.of(a, c), Edge.of(c, d), Edge.of(d, e)), actual);
     }
 }
