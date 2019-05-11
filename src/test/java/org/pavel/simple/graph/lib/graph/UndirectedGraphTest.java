@@ -63,7 +63,7 @@ class UndirectedGraphTest {
     }
 
     @Test
-    void onlyPathBetweenVertexes() {
+    void onlyPathBetweenVertices() {
         Vertex a = Vertex.of("A");
         Vertex b = Vertex.of("B");
         graph.addVertex(a);
@@ -76,7 +76,7 @@ class UndirectedGraphTest {
     }
 
     @Test
-    void onlyPathBetweenVertexesWithNullSearchEngine() {
+    void onlyPathBetweenVerticesWithNullSearchEngine() {
         Vertex a = Vertex.of("A");
         Vertex b = Vertex.of("B");
         graph.addVertex(a);
@@ -89,7 +89,7 @@ class UndirectedGraphTest {
     }
 
     @Test
-    void reversedPathBetweenVertexes() {
+    void reversedPathBetweenVertices() {
         Vertex a = Vertex.of("A");
         Vertex b = Vertex.of("B");
         graph.addVertex(a);

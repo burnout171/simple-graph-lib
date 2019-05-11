@@ -12,10 +12,10 @@ final class PathConstructor {
     private PathConstructor() {
     }
 
-    static <V> List<Edge<V>> toPath(V src, V dst, Map<V, Edge<V>> predecessors) {
+    static <V> List<Edge<V>> toPath(V source, V destination, Map<V, Edge<V>> predecessors) {
         List<Edge<V>> path = new ArrayList<>();
-        V current = dst;
-        while (!current.equals(src)) {
+        V current = destination;
+        while (!current.equals(source)) {
             Edge<V> edge = predecessors.get(current);
             path.add(edge);
             current = edge.getSource();

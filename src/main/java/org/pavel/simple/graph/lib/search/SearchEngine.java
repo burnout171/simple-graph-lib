@@ -16,11 +16,11 @@ public interface SearchEngine<V> {
     /**
      * Get path from source to the destination vertex with a provided mapping between vertices and edges.
      *
-     * @param src             vertex.
-     * @param dst             vertex.
+     * @param source          vertex.
+     * @param destination     vertex.
      * @param verticesToEdges mapping between vertices and edges.
      * @return list of edges between provided vertices. Empty list if path not found.
      */
-    List<Edge<V>> getPath(V src, V dst, Map<V, Set<Edge<V>>> verticesToEdges);
+    List<Edge<V>> getPath(V source, V destination, Map<V, Set<Edge<V>>> verticesToEdges);
 
 }

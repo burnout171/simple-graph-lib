@@ -39,12 +39,12 @@ public abstract class AbstractGraph<V> implements Graph<V> {
     }
 
     @Override
-    public List<Edge<V>> getPath(V src, V dst, SearchEngine<V> searchEngine) {
-        if (isNull(src) || isNull(dst)) {
-            throw new IllegalArgumentException("Src and dst vertices should not be null!");
+    public List<Edge<V>> getPath(V source, V destination, SearchEngine<V> searchEngine) {
+        if (isNull(source) || isNull(destination)) {
+            throw new IllegalArgumentException("source and destination vertices should not be null!");
         }
         searchEngine = nonNull(searchEngine) ? searchEngine : new BfsSearch<>();
-        return searchEngine.getPath(src, dst, verticesToEdges);
+        return searchEngine.getPath(source, destination, verticesToEdges);
     }
 
     void checkVerticesExist(Edge<V> edge) {

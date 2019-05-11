@@ -13,10 +13,9 @@ import java.util.Stack;
 import static java.util.Objects.isNull;
 import static org.pavel.simple.graph.lib.search.PathConstructor.toPath;
 
-public class DfsSearch<V> implements SearchEngine<V> {
+public class DfsSearch<V> extends AbstractSearchEngine<V> {
 
-    @Override
-    public List<Edge<V>> getPath(V source, V destination, Map<V, Set<Edge<V>>> verticesToEdges) {
+    List<Edge<V>> doSearch(V source, V destination, Map<V, Set<Edge<V>>> verticesToEdges) {
         Stack<V> traversed = new Stack<>();
         Set<V> visited = new HashSet<>();
         Map<V, Edge<V>> predecessors = new HashMap<>();

@@ -14,10 +14,9 @@ import java.util.Set;
 import static java.util.Objects.isNull;
 import static org.pavel.simple.graph.lib.search.PathConstructor.toPath;
 
-public class BfsSearch<V> implements SearchEngine<V> {
+public class BfsSearch<V> extends AbstractSearchEngine<V> {
 
-    @Override
-    public List<Edge<V>> getPath(V source, V destination, Map<V, Set<Edge<V>>> verticesToEdges) {
+    List<Edge<V>> doSearch(V source, V destination, Map<V, Set<Edge<V>>> verticesToEdges) {
         Queue<V> traversed = new LinkedList<>();
         Set<V> visited = new HashSet<>();
         Map<V, Edge<V>> predecessors = new HashMap<>();
