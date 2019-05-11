@@ -16,7 +16,7 @@ import static org.pavel.simple.graph.lib.search.PathConstructor.toPath;
 public class DfsSearch<V> implements SearchEngine<V> {
 
     @Override
-    public List<Edge<V>> getPath(V source, V destination, Map<V, Set<Edge<V>>> vertexesToEdges) {
+    public List<Edge<V>> getPath(V source, V destination, Map<V, Set<Edge<V>>> verticesToEdges) {
         Stack<V> traversed = new Stack<>();
         Set<V> visited = new HashSet<>();
         Map<V, Edge<V>> predecessors = new HashMap<>();
@@ -24,7 +24,7 @@ public class DfsSearch<V> implements SearchEngine<V> {
         traversed.push(source);
         while (!traversed.empty()) {
             V currentVertex = traversed.pop();
-            Set<Edge<V>> adjustmentEdges = vertexesToEdges.get(currentVertex);
+            Set<Edge<V>> adjustmentEdges = verticesToEdges.get(currentVertex);
             if (isNull(adjustmentEdges)) {
                 continue;
             }

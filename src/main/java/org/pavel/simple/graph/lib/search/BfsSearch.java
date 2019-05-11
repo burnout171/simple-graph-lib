@@ -17,7 +17,7 @@ import static org.pavel.simple.graph.lib.search.PathConstructor.toPath;
 public class BfsSearch<V> implements SearchEngine<V> {
 
     @Override
-    public List<Edge<V>> getPath(V source, V destination, Map<V, Set<Edge<V>>> vertexesToEdges) {
+    public List<Edge<V>> getPath(V source, V destination, Map<V, Set<Edge<V>>> verticesToEdges) {
         Queue<V> traversed = new LinkedList<>();
         Set<V> visited = new HashSet<>();
         Map<V, Edge<V>> predecessors = new HashMap<>();
@@ -25,7 +25,7 @@ public class BfsSearch<V> implements SearchEngine<V> {
         traversed.add(source);
         while (!traversed.isEmpty()) {
             V currentVertex = traversed.poll();
-            Set<Edge<V>> adjustmentEdges = vertexesToEdges.get(currentVertex);
+            Set<Edge<V>> adjustmentEdges = verticesToEdges.get(currentVertex);
             if (isNull(adjustmentEdges)) {
                 continue;
             }

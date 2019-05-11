@@ -41,13 +41,13 @@ public abstract class AbstractGraph<V> implements Graph<V> {
     @Override
     public List<Edge<V>> getPath(V src, V dst, SearchEngine<V> searchEngine) {
         if (isNull(src) || isNull(dst)) {
-            throw new IllegalArgumentException("Src and dst vertexes should not be null!");
+            throw new IllegalArgumentException("Src and dst vertices should not be null!");
         }
         searchEngine = nonNull(searchEngine) ? searchEngine : new BfsSearch<>();
         return searchEngine.getPath(src, dst, verticesToEdges);
     }
 
-    void checkVertexesExist(Edge<V> edge) {
+    void checkVerticesExist(Edge<V> edge) {
         if (!verticesToEdges.containsKey(edge.getSource())) {
             throw new IllegalArgumentException("Could not add edge since vertex " + edge.getSource() + " does not exist");
         }

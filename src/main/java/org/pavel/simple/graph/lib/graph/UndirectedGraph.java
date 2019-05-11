@@ -6,7 +6,7 @@ public class UndirectedGraph<V> extends AbstractGraph<V> {
 
     @Override
     public void addEdge(Edge<V> edge) {
-        checkVertexesExist(edge);
+        checkVerticesExist(edge);
         super.addEdge(edge);
         Edge<V> reversed = Edge.of(edge.getDestination(), edge.getSource());
         super.addEdge(reversed);

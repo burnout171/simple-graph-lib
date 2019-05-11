@@ -6,7 +6,7 @@ public class DirectedGraph<V> extends AbstractGraph<V> {
 
     @Override
     public void addEdge(Edge<V> edge) {
-        checkVertexesExist(edge);
+        checkVerticesExist(edge);
         super.addEdge(edge);
     }
 }
